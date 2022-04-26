@@ -1,5 +1,7 @@
 FROM debian:buster
 
-RUN apt-get update && apt-get upgrade
+RUN apt-get update && apt-get -y upgrade
+RUN apt-get install -y nginx
 
-ENTRYPOINT ["bash"]
+# CMD [ "bash" ]
+CMD ["nginx", "-g", "daemon off;"]
