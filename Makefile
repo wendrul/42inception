@@ -1,20 +1,17 @@
 NAME	= inception
 
 
-all		:	
-			cd srcs && docker-compose up
-			@echo composed up
+all		:	re
 
 build	:	
-			cd srcs && docker-compose build
-			@echo built
+			cd srcs && docker-compose build --no-cache
 re		: 
 			cd srcs && docker-compose up --build
-			@echo rebuilt and restarted
 
+no-cache: 
+			cd srcs && docker-compose up --build --no-cache
 down	:	
 			cd srcs && docker-compose down
-			@echo composed down
 
 
 $(NAME) : all
