@@ -1,7 +1,5 @@
 #!/bin/sh
 
-mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm > /dev/null
-
 cat  > /tmp/mariadb-user.sql << EOF
   USE mysql;
   FLUSH PRIVILEGES;
