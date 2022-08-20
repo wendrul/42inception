@@ -3,7 +3,7 @@ FROM alpine:3.15
 RUN	apk update && apk upgrade
 RUN apk add mariadb-client
 RUN apk add                 \
-        php7				\
+    php7				\
 		php7-fpm			\
 		php7-bcmath			\
 		php7-bz2 			\
@@ -57,23 +57,13 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/bin/wp
 
-WORKDIR /var/www/html/wordpress
 
 #PHP-FPM
 RUN	adduser -S nginx &&	addgroup -S nginx
 COPY conf/php-fpm.conf /etc/php7/php-fpm.conf
 COPY conf/www.conf /etc/php7/php-fpm.d/www.conf
 
+WORKDIR /var/www/html/wordpress
 
 COPY ./entrypoint.sh /tmp/entrypoint.sh
 CMD [ "sh", "/tmp/entrypoint.sh" ]
-
-#TEST THINGY
-
-# RUN apk add python3
-# RUN python3 -m ensurepip
-# RUN pip3 install --no-cache --upgrade pip setuptools
-# # RUN pip3 install http.server
-# RUN mkdir -p /tmp/test && echo "Hello world" > /tmp/test/index.html
-# WORKDIR /tmp/test
-# CMD ["python3", "-m" , "http.server 9000"]
