@@ -1,4 +1,4 @@
-# #!/bin/sh
+#!/bin/sh
 
 while ! mariadb -h$MYSQL_HOST -u$WP_DB_USR -p$WP_DB_PWD $WP_DB_NAME &>/dev/null; do
     echo "Waiting for MariaDB..."
@@ -16,4 +16,4 @@ if [ ! -f "/var/www/html/wordpress/index.php" ] ||  ! echo "Wordpress already in
 fi
 
 echo "WordPress ready, starting php-fpm..."
-/usr/sbin/php-fpm7 -F -R
+exec /usr/sbin/php-fpm7 -F -R
